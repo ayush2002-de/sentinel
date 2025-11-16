@@ -1,0 +1,67 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: sentinel_pg
+    ports:
+      - "5431:5432"
+    environment:
+      POSTGRES_USER: sentinel
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: sentinel_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sentinel -d sentinel_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: sentinel_redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    image: node:22-bullseye
+    container_name: sentinel_api
+    working_dir: /app
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: "postgresql://sentinel:password@postgres:5432/sentinel_db"
+      REDIS_URL: "redis://redis:6379"
+      NODE_ENV: "development"
+    volumes:
+      - ./api:/app  # mount code
+      - /app/node_modules # avoid overwriting node_modules
+    command: sh -c "npm install -g pnpm && pnpm install && pnpm prisma generate && pnpm run dev"
+
+  web:
+    image: node:22-bullseye
+    container_name: sentinel_web
+    working_dir: /app
+    ports:
+      - "5173:5173"
+    depends_on:
+      - api
+    volumes:
+      - ./web:/app
+      - /app/node_modules
+    command: sh -c "npm install -g pnpm && pnpm install && pnpm run dev -- --host"
+
+volumes:
+  postgres_data:
+    driver: local

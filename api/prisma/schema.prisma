@@ -1,0 +1,171 @@
+// /api/prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// --- customers/cards/accounts ---
+
+model Customer {
+  id           String    @id @default(uuid())
+  name         String
+  email_masked String    @unique
+  kyc_level    String    @default("LVL_1")
+  created_at   DateTime  @default(now())
+  cards        Card[]
+  accounts     Account[]
+  transactions Transaction[]
+  alerts       Alert[]
+  cases        Case[]
+}
+
+model Card {
+  id          String   @id @default(uuid())
+  last4       String
+  network     String // e.g., "VISA", "MASTERCARD"
+  status      String // e.g., "ACTIVE", "FROZEN", "CLOSED"
+  created_at  DateTime @default(now())
+  customer_id String
+  customer    Customer @relation(fields: [customer_id], references: [id])
+  transactions Transaction[]
+
+  @@index([customer_id])
+}
+
+model Account {
+  id            String   @id @default(uuid())
+  balance_cents Int
+  currency      String   @default("USD")
+  created_at    DateTime @default(now())
+  customer_id   String
+  customer      Customer @relation(fields: [customer_id], references: [id])
+
+  @@index([customer_id])
+}
+
+// --- transactions ---
+
+model Transaction {
+  id            String     @id @default(uuid())
+  mcc           String // Merchant Category Code
+  merchant      String
+  amount_cents  Int
+  currency      String
+  ts            DateTime   @db.Timestamptz
+  device_id     String?
+  country       String
+  city          String?
+  metadata      Json?      @db.JsonB // For test flags like simulate_risk_timeout
+  customer_id   String
+  customer      Customer   @relation(fields: [customer_id], references: [id])
+  card_id       String
+  card          Card       @relation(fields: [card_id], references: [id])
+  suspectAlerts Alert[]
+  cases         Case[]
+
+  // Critical index for the p95 <= 100ms SLO
+  @@index([customer_id, ts(sort: Desc)])
+  
+  // Other required indexes
+  @@index([merchant])
+  @@index([mcc])
+  @@index([customer_id, merchant])
+  
+  // Deduplication index
+  @@unique([customer_id, id], name: "customer_txn_id")
+}
+
+// --- alerts & cases ---
+
+model Alert {
+  id             String       @id @default(uuid())
+  created_at     DateTime     @default(now())
+  risk           String // "LOW", "MEDIUM", "HIGH"
+  status         String // "NEW", "TRIAGED", "CLOSED"
+  customer_id    String
+  customer       Customer     @relation(fields: [customer_id], references: [id])
+  suspect_txn_id String?
+  suspect_txn    Transaction? @relation(fields: [suspect_txn_id], references: [id])
+  triage_runs    TriageRun[]
+
+  @@index([customer_id])
+  @@index([status, created_at])
+}
+
+model Case {
+  id           String      @id @default(uuid())
+  type         String // "DISPUTE", "FRAUD_REPORT"
+  status       String // "OPEN", "CLOSED", "PENDING_CUSTOMER"
+  reason_code  String?
+  created_at   DateTime    @default(now())
+  customer_id  String
+  customer     Customer    @relation(fields: [customer_id], references: [id])
+  txn_id       String?
+  transaction  Transaction? @relation(fields: [txn_id], references: [id])
+  case_events  CaseEvent[]
+
+  @@index([customer_id])
+  @@index([status])
+}
+
+model CaseEvent {
+  id           String   @id @default(uuid())
+  ts           DateTime @default(now())
+  actor        String // e.g., "agent:bob", "system:triage_run_123"
+  action       String // e.g., "FREEZE_CARD", "OPEN_DISPUTE"
+  payload_json Json?  @db.JsonB // Redacted payload
+  case_id      String
+  case         Case     @relation(fields: [case_id], references: [id])
+
+  @@index([case_id, ts(sort: Desc)])
+}
+
+// --- triage runs & traces ---
+
+model TriageRun {
+  id            String        @id @default(uuid())
+  started_at    DateTime      @default(now())
+  ended_at      DateTime?
+  risk          String // "LOW", "MEDIUM", "HIGH"
+  reasons       Json?       @db.JsonB // string[]
+  fallback_used Boolean       @default(false)
+  latency_ms    Int?
+  alert_id      String
+  alert         Alert         @relation(fields: [alert_id], references: [id])
+  traces        AgentTrace[]
+
+  @@index([alert_id])
+}
+
+model AgentTrace {
+  run_id      String
+  triage_run  TriageRun @relation(fields: [run_id], references: [id])
+  seq         Int // Sequence number
+  step        String // "getProfile", "riskSignals"
+  ok          Boolean
+  duration_ms Int
+  detail_json Json?   @db.JsonB // Redacted I/O payload
+
+  @@id([run_id, seq]) // Composite primary key
+}
+
+// --- kb & policies ---
+
+model KbDoc {
+  id          String   @id @default(uuid())
+  title       String
+  anchor      String   @unique // e.g., "disputes:pre-auth-vs-capture"
+  content_text String
+}
+
+model Policy {
+  id           String @id @default(uuid())
+  code         String @unique // e.g., "OTP_REQUIRED_FOR_UNFREEZE"
+  title        String
+  content_text String
+}

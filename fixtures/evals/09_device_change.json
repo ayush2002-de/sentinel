@@ -1,0 +1,8 @@
+{
+  "name": "Low Risk - Recurring Subscription",
+  "alertId": "alert_007",
+  "expected": {
+    "risk": "LOW",
+    "finalAction": "OPEN_DISPUTE"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "summary": {
+    "totalCases": 14,
+    "passed": 14,
+    "failed": 0,
+    "successRate": "100.0",
+    "fallbackCount": 1,
+    "fallbackRate": "7.1"
+  },
+  "latency": {
+    "p50": "18",
+    "p95": "152"
+  },
+  "confusionMatrix": {
+    "LOW": {
+      "LOW": 11,
+      "MEDIUM": 0,
+      "HIGH": 0
+    },
+    "MEDIUM": {
+      "LOW": 0,
+      "MEDIUM": 2,
+      "HIGH": 0
+    },
+    "HIGH": {
+      "LOW": 0,
+      "MEDIUM": 0,
+      "HIGH": 1
+    }
+  },
+  "policyDenials": [],
+  "failures": []
+}

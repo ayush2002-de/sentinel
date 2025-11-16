@@ -1,0 +1,8 @@
+{
+  "name": "Freeze w/ OTP Path",
+  "alertId": "alert_acceptance_01_otp",
+  "expected": {
+    "risk": "HIGH",
+    "finalAction": "FREEZE_CARD"
+  }
+}

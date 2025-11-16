@@ -1,0 +1,86 @@
+[
+  {
+    "id": "acc_001",
+    "balance_cents": 125000,
+    "currency": "USD",
+    "created_at": "2022-03-15T10:30:00.000Z",
+    "customer_id": "cust_001"
+  },
+  {
+    "id": "acc_002",
+    "balance_cents": 50000,
+    "currency": "EUR",
+    "created_at": "2022-07-10T11:00:00.000Z",
+    "customer_id": "cust_001"
+  },
+  {
+    "id": "acc_003",
+    "balance_cents": 78500,
+    "currency": "USD",
+    "created_at": "2023-01-10T08:15:00.000Z",
+    "customer_id": "cust_002"
+  },
+  {
+    "id": "acc_004",
+    "balance_cents": 200000,
+    "currency": "USD",
+    "created_at": "2021-11-22T14:45:00.000Z",
+    "customer_id": "cust_003"
+  },
+  {
+    "id": "acc_005",
+    "balance_cents": 15000,
+    "currency": "GBP",
+    "created_at": "2022-02-05T09:20:00.000Z",
+    "customer_id": "cust_003"
+  },
+  {
+    "id": "acc_006",
+    "balance_cents": 3500,
+    "currency": "USD",
+    "created_at": "2023-06-05T09:20:00.000Z",
+    "customer_id": "cust_004"
+  },
+  {
+    "id": "acc_007",
+    "balance_cents": 450000,
+    "currency": "USD",
+    "created_at": "2022-09-18T11:00:00.000Z",
+    "customer_id": "cust_005"
+  },
+  {
+    "id": "acc_008",
+    "balance_cents": 92000,
+    "currency": "CAD",
+    "created_at": "2023-02-28T16:30:00.000Z",
+    "customer_id": "cust_006"
+  },
+  {
+    "id": "acc_009",
+    "balance_cents": 12500,
+    "currency": "USD",
+    "created_at": "2023-08-12T13:10:00.000Z",
+    "customer_id": "cust_007"
+  },
+  {
+    "id": "acc_010",
+    "balance_cents": 300000,
+    "currency": "USD",
+    "created_at": "2022-05-20T10:45:00.000Z",
+    "customer_id": "cust_008"
+  },
+  {
+    "id": "acc_011",
+    "balance_cents": 65000,
+    "currency": "USD",
+    "created_at": "2023-03-07T15:20:00.000Z",
+    "customer_id": "cust_009"
+  },
+  {
+    "id": "acc_012",
+    "balance_cents": 8900,
+    "currency": "AUD",
+    "created_at": "2023-07-14T12:00:00.000Z",
+    "customer_id": "cust_010"
+  }
+]

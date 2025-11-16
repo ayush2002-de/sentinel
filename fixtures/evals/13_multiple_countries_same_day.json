@@ -1,0 +1,8 @@
+{
+  "name": "Low Risk - E-commerce Purchase",
+  "alertId": "alert_011",
+  "expected": {
+    "risk": "LOW",
+    "finalAction": "NONE"
+  }
+}

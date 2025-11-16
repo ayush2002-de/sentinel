@@ -1,0 +1,8 @@
+{
+  "name": "Low Risk - Airline Ticket",
+  "alertId": "alert_010",
+  "expected": {
+    "risk": "LOW",
+    "finalAction": "NONE"
+  }
+}

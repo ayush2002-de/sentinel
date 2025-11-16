@@ -1,0 +1,8 @@
+{
+  "name": "Low Risk - Regular Merchant",
+  "alertId": "alert_006",
+  "expected": {
+    "risk": "LOW",
+    "finalAction": "NONE"
+  }
+}

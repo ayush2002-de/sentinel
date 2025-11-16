@@ -1,0 +1,122 @@
+[
+  {
+    "id": "card_001",
+    "last4": "4532",
+    "network": "VISA",
+    "status": "ACTIVE",
+    "created_at": "2022-03-15T10:30:00.000Z",
+    "customer_id": "cust_001"
+  },
+  {
+    "id": "card_002",
+    "last4": "8901",
+    "network": "MASTERCARD",
+    "status": "ACTIVE",
+    "created_at": "2022-06-20T14:15:00.000Z",
+    "customer_id": "cust_001"
+  },
+  {
+    "id": "card_003",
+    "last4": "3456",
+    "network": "VISA",
+    "status": "ACTIVE",
+    "created_at": "2023-01-10T08:15:00.000Z",
+    "customer_id": "cust_002"
+  },
+  {
+    "id": "card_004",
+    "last4": "7890",
+    "network": "AMEX",
+    "status": "FROZEN",
+    "created_at": "2023-05-12T11:30:00.000Z",
+    "customer_id": "cust_002"
+  },
+  {
+    "id": "card_005",
+    "last4": "2345",
+    "network": "VISA",
+    "status": "ACTIVE",
+    "created_at": "2021-11-22T14:45:00.000Z",
+    "customer_id": "cust_003"
+  },
+  {
+    "id": "card_006",
+    "last4": "6789",
+    "network": "MASTERCARD",
+    "status": "ACTIVE",
+    "created_at": "2022-01-15T09:00:00.000Z",
+    "customer_id": "cust_003"
+  },
+  {
+    "id": "card_007",
+    "last4": "1234",
+    "network": "VISA",
+    "status": "CLOSED",
+    "created_at": "2021-12-10T16:20:00.000Z",
+    "customer_id": "cust_003"
+  },
+  {
+    "id": "card_008",
+    "last4": "5678",
+    "network": "VISA",
+    "status": "ACTIVE",
+    "created_at": "2023-06-05T09:20:00.000Z",
+    "customer_id": "cust_004"
+  },
+  {
+    "id": "card_009",
+    "last4": "9012",
+    "network": "MASTERCARD",
+    "status": "ACTIVE",
+    "created_at": "2022-09-18T11:00:00.000Z",
+    "customer_id": "cust_005"
+  },
+  {
+    "id": "card_010",
+    "last4": "3456",
+    "network": "AMEX",
+    "status": "ACTIVE",
+    "created_at": "2023-01-05T13:45:00.000Z",
+    "customer_id": "cust_005"
+  },
+  {
+    "id": "card_011",
+    "last4": "7890",
+    "network": "VISA",
+    "status": "ACTIVE",
+    "created_at": "2023-02-28T16:30:00.000Z",
+    "customer_id": "cust_006"
+  },
+  {
+    "id": "card_012",
+    "last4": "1234",
+    "network": "VISA",
+    "status": "ACTIVE",
+    "created_at": "2023-08-12T13:10:00.000Z",
+    "customer_id": "cust_007"
+  },
+  {
+    "id": "card_013",
+    "last4": "5678",
+    "network": "MASTERCARD",
+    "status": "FROZEN",
+    "created_at": "2022-05-20T10:45:00.000Z",
+    "customer_id": "cust_008"
+  },
+  {
+    "id": "card_014",
+    "last4": "9012",
+    "network": "VISA",
+    "status": "ACTIVE",
+    "created_at": "2023-03-07T15:20:00.000Z",
+    "customer_id": "cust_009"
+  },
+  {
+    "id": "card_015",
+    "last4": "3456",
+    "network": "VISA",
+    "status": "ACTIVE",
+    "created_at": "2023-07-14T12:00:00.000Z",
+    "customer_id": "cust_010"
+  }
+]

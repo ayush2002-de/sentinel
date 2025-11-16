@@ -1,0 +1,98 @@
+[
+  {
+    "id": "cb_001",
+    "customer_id": "cust_001",
+    "txn_id": null,
+    "merchant": "ABC Mart",
+    "amount_cents": 4999,
+    "currency": "USD",
+    "reason_code": "10.4",
+    "status": "WON",
+    "filed_at": "2023-01-15T10:00:00.000Z",
+    "resolved_at": "2023-02-20T14:30:00.000Z"
+  },
+  {
+    "id": "cb_002",
+    "customer_id": "cust_002",
+    "txn_id": null,
+    "merchant": "TechZone",
+    "amount_cents": 89900,
+    "currency": "USD",
+    "reason_code": "13.1",
+    "status": "LOST",
+    "filed_at": "2023-03-10T11:00:00.000Z",
+    "resolved_at": "2023-04-15T16:00:00.000Z"
+  },
+  {
+    "id": "cb_003",
+    "customer_id": "cust_003",
+    "txn_id": null,
+    "merchant": "QuickCab",
+    "amount_cents": 1500,
+    "currency": "USD",
+    "reason_code": "13.2",
+    "status": "PENDING",
+    "filed_at": "2023-10-01T09:30:00.000Z",
+    "resolved_at": null
+  },
+  {
+    "id": "cb_004",
+    "customer_id": "cust_004",
+    "txn_id": null,
+    "merchant": "Global Airlines",
+    "amount_cents": 45000,
+    "currency": "USD",
+    "reason_code": "10.4",
+    "status": "WON",
+    "filed_at": "2023-05-20T14:00:00.000Z",
+    "resolved_at": "2023-06-25T10:00:00.000Z"
+  },
+  {
+    "id": "cb_005",
+    "customer_id": "cust_005",
+    "txn_id": null,
+    "merchant": "Starcoffee",
+    "amount_cents": 550,
+    "currency": "USD",
+    "reason_code": "13.3",
+    "status": "WON",
+    "filed_at": "2023-07-12T08:00:00.000Z",
+    "resolved_at": "2023-08-05T12:00:00.000Z"
+  },
+  {
+    "id": "cb_006",
+    "customer_id": "cust_006",
+    "txn_id": null,
+    "merchant": "ByteGoods",
+    "amount_cents": 12000,
+    "currency": "USD",
+    "reason_code": "10.4",
+    "status": "PENDING",
+    "filed_at": "2023-09-15T10:30:00.000Z",
+    "resolved_at": null
+  },
+  {
+    "id": "cb_007",
+    "customer_id": "cust_007",
+    "txn_id": null,
+    "merchant": "The Corner Cafe",
+    "amount_cents": 2850,
+    "currency": "USD",
+    "reason_code": "13.5",
+    "status": "LOST",
+    "filed_at": "2023-02-18T15:00:00.000Z",
+    "resolved_at": "2023-03-22T11:00:00.000Z"
+  },
+  {
+    "id": "cb_008",
+    "customer_id": "cust_008",
+    "txn_id": null,
+    "merchant": "NetFlix",
+    "amount_cents": 1599,
+    "currency": "USD",
+    "reason_code": "13.6",
+    "status": "WON",
+    "filed_at": "2023-08-05T09:00:00.000Z",
+    "resolved_at": "2023-09-10T14:00:00.000Z"
+  }
+]

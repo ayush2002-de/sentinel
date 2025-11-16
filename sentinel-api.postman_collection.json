@@ -1,0 +1,705 @@
+{
+  "info": {
+    "name": "Sentinel Support API",
+    "description": "Complete API collection for fraud triage system with all acceptance test scenarios",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "value",
+        "value": "sentinel-dev-key",
+        "type": "string"
+      },
+      {
+        "key": "key",
+        "value": "X-API-Key",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "runId",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health & Monitoring",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "health"]
+            }
+          }
+        },
+        {
+          "name": "Prometheus Metrics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/metrics",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "metrics"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Alerts",
+      "item": [
+        {
+          "name": "Get All Alerts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/alerts?limit=50",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "alerts"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "50"
+                },
+                {
+                  "key": "status",
+                  "value": "NEW",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Alerts - NEW Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/alerts?status=NEW&limit=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "alerts"],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "NEW"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Customers & Transactions",
+      "item": [
+        {
+          "name": "Get Customer Transactions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/customer/cust_001/transactions?limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "customer", "cust_001", "transactions"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "cursor",
+                  "value": "",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Customer Transactions - With Cursor",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/customer/cust_001/transactions?cursor={{nextCursor}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "customer", "cust_001", "transactions"],
+              "query": [
+                {
+                  "key": "cursor",
+                  "value": "{{nextCursor}}"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Triage",
+      "item": [
+        {
+          "name": "Start Triage",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 202) {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.collectionVariables.set('runId', jsonData.runId);",
+                  "    console.log('Saved runId:', jsonData.runId);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"alertId\": \"alert_acceptance_02_dispute\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/triage",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "triage"]
+            }
+          }
+        },
+        {
+          "name": "Stream Triage Results (SSE)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/event-stream"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/triage/{{runId}}/stream",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "triage", "{{runId}}", "stream"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Acceptance Tests",
+      "item": [
+        {
+          "name": "Test 1 - OTP Freeze Card",
+          "item": [
+            {
+              "name": "1. Start Triage (OTP)",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.collectionVariables.set('runId', pm.response.json().runId);"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alertId\": \"alert_acceptance_01_otp\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/triage",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "triage"]
+                }
+              }
+            },
+            {
+              "name": "2. Freeze Card (Triggers OTP)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Idempotency-Key",
+                    "value": "{{$guid}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cardId\": \"card_008\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/action/freeze-card",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "action", "freeze-card"]
+                }
+              }
+            },
+            {
+              "name": "3. Verify OTP & Freeze",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Idempotency-Key",
+                    "value": "{{$guid}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cardId\": \"card_008\",\n  \"otp\": \"123456\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/action/freeze-card",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "action", "freeze-card"]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Test 2 - Dispute with Reason Code",
+          "item": [
+            {
+              "name": "1. Start Triage (Dispute)",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.collectionVariables.set('runId', pm.response.json().runId);"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alertId\": \"alert_acceptance_02_dispute\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/triage",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "triage"]
+                }
+              }
+            },
+            {
+              "name": "2. Open Dispute with Reason Code",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Idempotency-Key",
+                    "value": "{{$guid}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"txnId\": \"txn_acceptance_02_dispute\",\n  \"reasonCode\": \"10.4\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/action/open-dispute",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "action", "open-dispute"]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Test 3 - Duplicate Pre-Auth Detection",
+          "item": [
+            {
+              "name": "Start Triage (Duplicate)",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alertId\": \"alert_acceptance_03_duplicate\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/triage",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "triage"]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Test 4 - Timeout Fallback",
+          "item": [
+            {
+              "name": "Start Triage (Timeout Simulation)",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alertId\": \"alert_acceptance_04_timeout\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/triage",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "triage"]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Test 5 - Rate Limiting",
+          "item": [
+            {
+              "name": "Rapid Request 1",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alertId\": \"alert_acceptance_05_ratelimit\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/triage",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "triage"]
+                }
+              }
+            },
+            {
+              "name": "Rapid Request 2",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alertId\": \"alert_acceptance_05_ratelimit\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/triage",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "triage"]
+                }
+              }
+            },
+            {
+              "name": "Rapid Request 3",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alertId\": \"alert_acceptance_05_ratelimit\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/triage",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "triage"]
+                }
+              }
+            },
+            {
+              "name": "Rapid Request 4",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alertId\": \"alert_acceptance_05_ratelimit\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/triage",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "triage"]
+                }
+              }
+            },
+            {
+              "name": "Rapid Request 5",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alertId\": \"alert_acceptance_05_ratelimit\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/triage",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "triage"]
+                }
+              }
+            },
+            {
+              "name": "Rapid Request 6 (Should 429)",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alertId\": \"alert_acceptance_05_ratelimit\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/triage",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "triage"]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Test 6 - PII Redaction",
+          "item": [
+            {
+              "name": "Get Customer Transactions (PII)",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/customer/cust_007/transactions?limit=5",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "customer", "cust_007", "transactions"],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Start Triage (PII Alert)",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alertId\": \"alert_acceptance_06_pii\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/triage",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "triage"]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Actions",
+      "item": [
+        {
+          "name": "Freeze Card",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Idempotency-Key",
+                "value": "{{$guid}}",
+                "description": "Auto-generated UUID"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cardId\": \"card_001\",\n  \"otp\": \"123456\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/action/freeze-card",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "action", "freeze-card"]
+            }
+          }
+        },
+        {
+          "name": "Open Dispute",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Idempotency-Key",
+                "value": "{{$guid}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"txnId\": \"txn_acceptance_02_dispute\",\n  \"reasonCode\": \"10.4\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/action/open-dispute",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "action", "open-dispute"]
+            }
+          }
+        },
+        {
+          "name": "Contact Customer",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Idempotency-Key",
+                "value": "{{$guid}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": \"cust_001\",\n  \"message\": \"We noticed unusual activity on your account. Please call us.\",\n  \"channel\": \"EMAIL\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/action/contact-customer",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "action", "contact-customer"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cards",
+      "item": [
+        {
+          "name": "Get Card Details",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/cards/card_001",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "cards", "card_001"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+[
+  {
+    "id": "kb_001",
+    "title": "Understanding Disputes: Pre-Auth vs Capture",
+    "anchor": "disputes:pre-auth-vs-capture",
+    "content_text": "A pre-authorization (pre-auth) is a hold placed on a customer's card before the final transaction is captured. This is common in hotels, car rentals, and gas stations. A capture happens when the merchant finalizes the charge. If a customer disputes a pre-auth hold, explain that the hold will expire automatically within 3-7 business days if not captured. If they dispute a captured transaction, initiate a formal chargeback process per network rules."
+  },
+  {
+    "id": "kb_002",
+    "title": "Card Freeze Policy",
+    "anchor": "cards:freeze-policy",
+    "content_text": "Customers can freeze their card at any time through the mobile app or by calling support. A frozen card will decline all new transactions but will not affect recurring payments or pre-authorized transactions. To unfreeze a card, customers must verify their identity via OTP (one-time password). Cards remain frozen until the customer explicitly unfreezes them or replaces the card."
+  },
+  {
+    "id": "kb_003",
+    "title": "Transaction Reversal Process",
+    "anchor": "transactions:reversal-process",
+    "content_text": "Transaction reversals can occur for several reasons: merchant-initiated refunds, duplicate charges, or processing errors. Reversals typically appear in the customer's account within 3-5 business days. For international transactions, reversals may take up to 10 business days due to currency conversion and settlement delays. Customers should contact the merchant first for refunds before escalating to the bank."
+  },
+  {
+    "id": "kb_004",
+    "title": "Fraud Alert Response Guidelines",
+    "anchor": "fraud:alert-response",
+    "content_text": "When a fraud alert is triggered, immediately contact the customer via their registered phone number or email. Verify recent transactions and ask if they recognize suspicious activity. If fraud is confirmed, freeze the affected card immediately, initiate a card replacement, and file a fraud report. Document all customer responses in the case management system. Follow up within 24 hours with a summary of actions taken."
+  },
+  {
+    "id": "kb_005",
+    "title": "Account Balance Reconciliation",
+    "anchor": "accounts:balance-reconciliation",
+    "content_text": "Account balance discrepancies can arise from pending transactions, holds, or system delays. When a customer reports an incorrect balance, check for: 1) Pending transactions not yet posted, 2) Merchant holds (gas stations, hotels), 3) Recurring payments scheduled but not processed, 4) International transaction currency conversion delays. Use the transaction history API to pull a complete ledger and reconcile manually if needed."
+  },
+  {
+    "id": "kb_006",
+    "title": "KYC Level Requirements",
+    "anchor": "kyc:level-requirements",
+    "content_text": "Sentinel Bank uses a three-tier KYC (Know Your Customer) system: LVL_1 requires basic identity verification (name, email, phone). LVL_2 requires government-issued ID and proof of address. LVL_3 requires enhanced due diligence including income verification and source of funds documentation. Transaction limits and features vary by KYC level. Customers can upgrade their KYC level through the mobile app or web portal."
+  },
+  {
+    "id": "kb_007",
+    "title": "Chargeback Timelines and Deadlines",
+    "anchor": "disputes:chargeback-timelines",
+    "content_text": "Chargeback deadlines vary by card network. Visa: 120 days from transaction date. Mastercard: 120 days from transaction date. Amex: 120 days from statement date. Customers must file disputes within these timeframes or they forfeit their right to challenge the transaction. For international disputes, add 30 additional days. Always document the dispute date and ensure it falls within the allowed window."
+  },
+  {
+    "id": "kb_008",
+    "title": "Multi-Currency Account Management",
+    "anchor": "accounts:multi-currency",
+    "content_text": "Customers with multi-currency accounts can hold balances in USD, EUR, GBP, CAD, and AUD. Currency conversion happens automatically when a customer makes a transaction in a currency they don't hold. Conversion rates are updated hourly and include a 1.5% markup. Customers can manually convert currencies through the app at any time. Balance queries via API return all currency balances for the customer."
+  },
+  {
+    "id": "kb_009",
+    "title": "Recurring Payment Failures",
+    "anchor": "payments:recurring-failures",
+    "content_text": "When a recurring payment fails, the system retries up to 3 times over 7 days. Common failure reasons: insufficient funds, expired card, frozen card, or merchant block. Notify customers immediately on the first failure and provide options to update payment method or fund the account. After 3 failed attempts, the recurring payment is cancelled and the merchant is notified."
+  },
+  {
+    "id": "kb_010",
+    "title": "Account Closure Procedures",
+    "anchor": "accounts:closure-procedures",
+    "content_text": "To close an account, customers must: 1) Settle all outstanding balances, 2) Cancel all recurring payments, 3) Return physical cards (or confirm destruction), 4) Provide written confirmation of closure request. Accounts with pending transactions cannot be closed until all transactions settle. After closure, transaction history is retained for 7 years per regulatory requirements. Refunds to closed accounts are issued via check or bank transfer."
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "name": "Low Risk - Domestic Transaction",
+  "alertId": "alert_003",
+  "expected": {
+    "risk": "LOW",
+    "finalAction": "NONE"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "Risk Tool Timeout Fallback",
+  "alertId": "alert_acceptance_04_timeout",
+  "expected": {
+    "risk": "MEDIUM",
+    "finalAction": "OPEN_DISPUTE",
+    "fallbackUsed": true
+  }
+}

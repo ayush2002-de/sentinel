@@ -1,0 +1,9 @@
+{
+  "name": "Medium Risk - Open Dispute",
+  "alertId": "alert_acceptance_02_dispute",
+  "expected": {
+    "risk": "MEDIUM",
+    "finalAction": "OPEN_DISPUTE",
+    "fallbackUsed": false
+  }
+}

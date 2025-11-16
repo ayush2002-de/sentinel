@@ -1,0 +1,154 @@
+[
+  {
+    "id": "alert_acceptance_01_otp",
+    "created_at": "2025-11-15T10:00:00.000Z",
+    "risk": "HIGH",
+    "status": "NEW",
+    "customer_id": "cust_004",
+    "suspect_txn_id": "txn_acceptance_01_otp"
+  },
+  {
+    "id": "alert_acceptance_02_dispute",
+    "created_at": "2025-11-14T18:30:00.000Z",
+    "risk": "MEDIUM",
+    "status": "NEW",
+    "customer_id": "cust_002",
+    "suspect_txn_id": "txn_acceptance_02_dispute"
+  },
+  {
+    "id": "alert_acceptance_03_duplicate",
+    "created_at": "2025-11-15T09:00:00.000Z",
+    "risk": "MEDIUM",
+    "status": "NEW",
+    "customer_id": "cust_006",
+    "suspect_txn_id": "txn_acceptance_03_duplicate_capture"
+  },
+  {
+    "id": "alert_acceptance_04_timeout",
+    "created_at": "2025-11-15T11:00:00.000Z",
+    "risk": "MEDIUM",
+    "status": "NEW",
+    "customer_id": "cust_005",
+    "suspect_txn_id": "txn_acceptance_04_timeout"
+  },
+  {
+    "id": "alert_acceptance_05_ratelimit",
+    "created_at": "2025-11-15T12:00:00.000Z",
+    "risk": "LOW",
+    "status": "NEW",
+    "customer_id": "cust_003",
+    "suspect_txn_id": "txn_acceptance_05_ratelimit"
+  },
+  {
+    "id": "alert_acceptance_06_pii",
+    "created_at": "2025-11-15T13:00:00.000Z",
+    "risk": "HIGH",
+    "status": "NEW",
+    "customer_id": "cust_007",
+    "suspect_txn_id": "txn_acceptance_06_pii"
+  },
+  {
+    "id": "alert_acceptance_07_performance",
+    "created_at": "2025-11-15T14:00:00.000Z",
+    "risk": "LOW",
+    "status": "NEW",
+    "customer_id": "cust_001",
+    "suspect_txn_id": "txn_acceptance_07_performance"
+  },
+  {
+    "id": "alert_001",
+    "created_at": "2023-09-15T14:23:00.000Z",
+    "risk": "HIGH",
+    "status": "TRIAGED",
+    "customer_id": "cust_001",
+    "suspect_txn_id": "66585a53-dbfe-4b4e-b44c-aa984630efb6"
+  },
+  {
+    "id": "alert_002",
+    "created_at": "2023-09-20T09:45:00.000Z",
+    "risk": "MEDIUM",
+    "status": "NEW",
+    "customer_id": "cust_002",
+    "suspect_txn_id": "02d72487-1928-41f3-a1f1-017775a5c406"
+  },
+  {
+    "id": "alert_003",
+    "created_at": "2023-09-22T16:10:00.000Z",
+    "risk": "LOW",
+    "status": "CLOSED",
+    "customer_id": "cust_003",
+    "suspect_txn_id": "620720be-644a-4550-84c1-775d7165280d"
+  },
+  {
+    "id": "alert_004",
+    "created_at": "2023-09-25T11:30:00.000Z",
+    "risk": "HIGH",
+    "status": "NEW",
+    "customer_id": "cust_004",
+    "suspect_txn_id": "f93e0391-6c58-4b8b-89ce-b94bf9dc54b9"
+  },
+  {
+    "id": "alert_005",
+    "created_at": "2023-10-01T08:15:00.000Z",
+    "risk": "MEDIUM",
+    "status": "TRIAGED",
+    "customer_id": "cust_005",
+    "suspect_txn_id": "61c15d24-1494-495d-9f9e-f3b1c3c5dcd1"
+  },
+  {
+    "id": "alert_006",
+    "created_at": "2023-10-05T13:40:00.000Z",
+    "risk": "LOW",
+    "status": "CLOSED",
+    "customer_id": "cust_006",
+    "suspect_txn_id": "164a10fb-6898-4ca5-b1e4-1135e479ff4d"
+  },
+  {
+    "id": "alert_007",
+    "created_at": "2023-10-08T10:20:00.000Z",
+    "risk": "HIGH",
+    "status": "TRIAGED",
+    "customer_id": "cust_007",
+    "suspect_txn_id": "c5d9683a-5f73-4332-a8d9-af1c1964f04d"
+  },
+  {
+    "id": "alert_008",
+    "created_at": "2023-10-10T15:55:00.000Z",
+    "risk": "MEDIUM",
+    "status": "NEW",
+    "customer_id": "cust_008",
+    "suspect_txn_id": "db70586c-7974-460a-b5ba-f62b859313f2"
+  },
+  {
+    "id": "alert_009",
+    "created_at": "2023-10-12T12:30:00.000Z",
+    "risk": "MEDIUM",
+    "status": "NEW",
+    "customer_id": "cust_009",
+    "suspect_txn_id": "dc61d9ad-a246-4f7e-8492-1381f7db9ea7"
+  },
+  {
+    "id": "alert_010",
+    "created_at": "2023-10-15T09:15:00.000Z",
+    "risk": "HIGH",
+    "status": "NEW",
+    "customer_id": "cust_010",
+    "suspect_txn_id": "f2734dc9-0368-4ea3-90a9-c406e4c2d60c"
+  },
+  {
+    "id": "alert_011",
+    "created_at": "2023-10-18T14:45:00.000Z",
+    "risk": "HIGH",
+    "status": "NEW",
+    "customer_id": "cust_001",
+    "suspect_txn_id": "66b61e3b-6250-404a-8c08-07e8428f5bca"
+  },
+  {
+    "id": "alert_012",
+    "created_at": "2023-10-20T11:20:00.000Z",
+    "risk": "MEDIUM",
+    "status": "NEW",
+    "customer_id": "cust_002",
+    "suspect_txn_id": "49c5ae40-dfcf-4ea8-b82a-21699312f805"
+  }
+]

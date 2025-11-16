@@ -1,0 +1,8 @@
+{
+  "name": "Low Risk - Foreign Metro Transit",
+  "alertId": "alert_002",
+  "expected": {
+    "risk": "LOW",
+    "finalAction": "NONE"
+  }
+}

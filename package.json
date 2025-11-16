@@ -1,0 +1,24 @@
+{
+  "name": "sentinel-support",
+  "version": "1.0.0",
+  "description": "Customer support platform for Sentinel Bank",
+  "private": true,
+  "scripts": {
+    "install:all": "pnpm install && pnpm --filter=api install && pnpm --filter=web install",
+    "dev": "concurrently \"pnpm --filter=api dev\" \"pnpm --filter=web dev\"",
+    "build": "pnpm --filter=api build && pnpm --filter=web build",
+    "seed": "tsx scripts/seed.ts",
+    "generate-txns": "tsx scripts/generate_txns.ts",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.0.0"
+  },
+  "workspaces": [
+    "api",
+    "web"
+  ]
+}

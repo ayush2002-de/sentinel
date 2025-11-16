@@ -1,0 +1,8 @@
+{
+  "name": "Low Risk - Small Purchase",
+  "alertId": "alert_009",
+  "expected": {
+    "risk": "LOW",
+    "finalAction": "NONE"
+  }
+}

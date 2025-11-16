@@ -1,0 +1,62 @@
+[
+  {
+    "id": "policy_001",
+    "code": "OTP_REQUIRED_FOR_UNFREEZE",
+    "title": "OTP Required for Card Unfreeze",
+    "content_text": "Any request to unfreeze a frozen card must be authenticated using a one-time password (OTP) sent to the customer's registered phone number or email. This policy applies to all card unfreeze operations initiated through the mobile app, web portal, or customer service. The OTP expires after 10 minutes and can be resent up to 3 times within a 24-hour period. Agents must not unfreeze cards without valid OTP verification."
+  },
+  {
+    "id": "policy_002",
+    "code": "FRAUD_ALERT_ESCALATION",
+    "title": "Fraud Alert Escalation Policy",
+    "content_text": "All HIGH-risk fraud alerts must be escalated to the fraud investigation team within 2 hours of detection. MEDIUM-risk alerts must be triaged within 4 hours. LOW-risk alerts can be handled through automated systems or triaged within 24 hours. Escalation includes freezing the affected card, notifying the customer, and creating a case in the fraud management system. Failure to escalate within the specified timeframes may result in liability for fraudulent transactions."
+  },
+  {
+    "id": "policy_003",
+    "code": "MAX_DAILY_TRANSACTION_LIMIT",
+    "title": "Maximum Daily Transaction Limits by KYC Level",
+    "content_text": "Transaction limits vary by customer KYC level. LVL_1: $500 per transaction, $2,000 per day. LVL_2: $2,500 per transaction, $10,000 per day. LVL_3: $10,000 per transaction, $50,000 per day. These limits apply to debit card transactions and ACH transfers. Wire transfers have separate limits. Customers can request temporary limit increases by contacting support and providing additional verification."
+  },
+  {
+    "id": "policy_004",
+    "code": "CHARGEBACK_DOCUMENTATION",
+    "title": "Chargeback Documentation Requirements",
+    "content_text": "All chargeback disputes must include: 1) Customer's written statement describing the issue, 2) Transaction receipt or confirmation, 3) Communication with the merchant (if applicable), 4) Supporting evidence (photos, emails, contracts). Incomplete disputes will be rejected and returned to the customer. Documentation must be submitted within 7 days of the dispute filing. For international chargebacks, additional documentation may be required per card network rules."
+  },
+  {
+    "id": "policy_005",
+    "code": "ACCOUNT_INACTIVITY_CLOSURE",
+    "title": "Account Inactivity and Automatic Closure",
+    "content_text": "Accounts with no activity (deposits, withdrawals, or transactions) for 12 consecutive months are flagged as inactive. After 18 months of inactivity, the customer receives a notice of pending closure. If no response is received within 30 days, the account is closed automatically. Any remaining balance under $10 is forfeited. Balances over $10 are held in escrow for 3 years before being transferred to state unclaimed property funds per regulations."
+  },
+  {
+    "id": "policy_006",
+    "code": "CARD_REPLACEMENT_FEE",
+    "title": "Card Replacement Fee Structure",
+    "content_text": "Card replacements are free in the following cases: fraud, card malfunction, or first replacement per year. Additional replacements incur a $10 fee for standard delivery (7-10 business days) or $25 for expedited delivery (2-3 business days). Lost or stolen card replacements are free for the first occurrence, then $5 for subsequent occurrences within the same year. Fees are automatically deducted from the customer's account balance."
+  },
+  {
+    "id": "policy_007",
+    "code": "INTERNATIONAL_TRANSACTION_FEE",
+    "title": "International Transaction Fee Policy",
+    "content_text": "All international transactions (transactions outside the customer's home country or in foreign currencies) incur a 3% foreign transaction fee. This fee is applied at the time of transaction and appears as a separate line item in the transaction history. ATM withdrawals abroad incur an additional $3 flat fee per withdrawal. Customers with premium accounts may qualify for reduced or waived international fees."
+  },
+  {
+    "id": "policy_008",
+    "code": "DISPUTE_RESOLUTION_TIMELINE",
+    "title": "Standard Dispute Resolution Timeline",
+    "content_text": "Provisional credit (temporary refund) is issued within 5 business days of dispute filing for transactions over $50. For transactions under $50, provisional credit is issued after initial investigation (10 business days). Full investigation and final resolution must be completed within 45 days for domestic transactions and 90 days for international transactions. Customers are notified of resolution via email and in-app notification."
+  },
+  {
+    "id": "policy_009",
+    "code": "RECURRING_PAYMENT_AUTHORIZATION",
+    "title": "Recurring Payment Authorization Policy",
+    "content_text": "Customers must explicitly authorize recurring payments through the app or web portal. Authorization includes: merchant name, amount, frequency, and start date. Customers can cancel recurring payments at any time, but cancellation must occur at least 3 business days before the next scheduled payment. Merchants are notified of cancellations automatically. Unauthorized recurring payments should be disputed immediately."
+  },
+  {
+    "id": "policy_010",
+    "code": "DATA_PRIVACY_CUSTOMER_INFO",
+    "title": "Customer Data Privacy and Access Policy",
+    "content_text": "Customer personal information (PII) is protected under GDPR and applicable privacy laws. Customers have the right to: 1) Access their data, 2) Request data corrections, 3) Request data deletion (subject to regulatory retention requirements), 4) Opt-out of marketing communications. Data access requests are fulfilled within 30 days. Agents must never share customer information without proper authentication. All data access is logged and audited."
+  }
+]

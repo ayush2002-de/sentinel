@@ -1,0 +1,8 @@
+{
+  "name": "Duplicate Pre-Auth Detection",
+  "alertId": "alert_acceptance_03_duplicate",
+  "expected": {
+    "risk": "LOW",
+    "finalAction": "NONE"
+  }
+}
