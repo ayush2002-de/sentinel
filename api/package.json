@@ -11,6 +11,7 @@
     "test": "vitest",
     "seed": "ts-node scripts/seed.ts",
     "ingest": "tsx scripts/ingest-transactions.ts",
+    "generate-txns": "ts-node scripts/generate_txns.ts",
     "eval": "tsx scripts/eval.ts",
     "load-test": "tsx scripts/load-test.ts",
     "k6": "k6 run scripts/k6-test.ts"

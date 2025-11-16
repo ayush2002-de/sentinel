@@ -2,17 +2,21 @@
 
 A production-ready fraud detection and customer support triage system built with TypeScript, React, and Claude API.
 
-## Quick Start (3 Commands)
+## Quick Start
 
 ```bash
 # 1. Start all services (Postgres, Redis, API, Web)
 podman compose up -d
+ 
+# 2: change directory
+cd api 
 
-# 2. Wait for services to initialize, then seed database
-cd api && pnpm
+#3 generate txns
+pnpm run generate-txns <Count>
 
-# 3. Open the web UI
-open http://localhost:5173
+# 4 seed database
+pnpm run seed
+
 ```
 
 **Default Credentials:**
@@ -109,51 +113,6 @@ open http://localhost:5173
 - **Indexed Queries**: Composite indexes on (customer_id, ts DESC)
 - **Prometheus Metrics**: `/metrics` endpoint for monitoring
 
----
-
-## Key Trade-offs
-
-### 1. **Deterministic Rules vs ML Models**
-**Choice**: Deterministic rule-based FraudAgent
-- ✅ **Pro**: Explainable, auditable, no training data needed
-- ✅ **Pro**: Instant results, no GPU/inference costs
-- ❌ **Con**: Requires manual rule updates for new fraud patterns
-- **Trade-off**: Prioritized **transparency and compliance** over adaptive learning
-
-### 2. **SSE vs WebSockets**
-**Choice**: Server-Sent Events (SSE) for real-time updates
-- ✅ **Pro**: Simpler implementation, automatic reconnection
-- ✅ **Pro**: HTTP/1.1 compatible, firewall-friendly
-- ❌ **Con**: One-way communication only (server → client)
-- **Trade-off**: Triage is **read-heavy**, so SSE fits perfectly
-
-### 3. **Redis Pub/Sub vs Direct SSE**
-**Choice**: Redis Pub/Sub as SSE backend
-- ✅ **Pro**: Horizontal scaling (multiple API instances can share events)
-- ✅ **Pro**: Decouples orchestrator from HTTP layer
-- ❌ **Con**: Adds Redis dependency and latency (~1-5ms)
-- **Trade-off**: **Scalability** over minimal latency for single-instance setups
-
-### 4. **In-Memory State vs Database State**
-**Choice**: Store pending triage state in-memory Map
-- ✅ **Pro**: Fast access, no DB round-trips during orchestration
-- ❌ **Con**: Lost on server restart (requires SSE reconnect)
-- **Trade-off**: **Performance** over crash recovery (acceptable for dev/MVP)
-
-### 5. **Full PII Redaction vs Partial Masking**
-**Choice**: Complete redaction (`****REDACTED****`)
-- ✅ **Pro**: Zero PII leakage risk, GDPR/PCI compliant
-- ❌ **Con**: No partial visibility for debugging (e.g., last 4 digits)
-- **Trade-off**: **Maximum security** over developer convenience
-
-### 6. **Keyset Pagination vs Offset/Limit**
-**Choice**: Cursor-based keyset pagination for transactions
-- ✅ **Pro**: Consistent performance at any page depth (no OFFSET scan)
-- ✅ **Pro**: Meets p95 ≤ 100ms SLO
-- ❌ **Con**: Can't jump to arbitrary page numbers
-- **Trade-off**: **Performance at scale** over UX flexibility
-
----
 
 ## Project Structure
 
@@ -254,14 +213,4 @@ podman compose restart api
 podman compose logs -f api
 ```
 
----
 
-## License
-
-MIT
-
----
-
-## Support
-
-For issues or questions, see [ACCEPTANCE_TESTS.md](ACCEPTANCE_TESTS.md) for debugging steps.
